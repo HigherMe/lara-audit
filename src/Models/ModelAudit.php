@@ -46,7 +46,7 @@ class ModelAudit extends Model
         $remote_model_type = data_get($audit_transform, 'model');
         $remote_model_column = data_get($audit_transform, 'column');
 
-        $builder = (new $remote_model_type)->where($remote_model_column, '=', $this->old_value);
+        $builder = (new $remote_model_type)->where($remote_model_column, '=', $this->new_value);
         if ($this->doesModelHaveSoftDeletes($remote_model_type)) {
             $remote_model = $builder->withTrashed()->first();
         } else {
