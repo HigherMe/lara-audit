@@ -4,13 +4,13 @@
   "homepage": "https://github.com/itsmill3rtime/lara-audit",
   "autoload": {
     "psr-4": {
-      "Itsmill3rtime\\LaraAudit\\": "src/"
+      "ItsMill3rTime\\LaraAudit\\": "src/"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "Itsmill3rtime\\LaraAudit\\LaraAuditServiceProvider"
+        "ItsMill3rTime\\LaraAudit\\LaraAuditServiceProvider"
       ]
     }
   }
