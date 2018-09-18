@@ -119,6 +119,6 @@ class ModelAudit extends Model
 
     public function actor()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(config('lara-audit.user_class_path', '\App\User'), 'user_id', 'id');
     }
 }
