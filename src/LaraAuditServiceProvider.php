@@ -17,7 +17,7 @@ class LaraAuditServiceProvider extends ServiceProvider
     {
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'lekker');
         // $this->loadViewsFrom(__DIR__.'/../resources/views', 'lekker');
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        //$this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         // $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         // Publishing is only necessary when using the CLI.
@@ -27,6 +27,10 @@ class LaraAuditServiceProvider extends ServiceProvider
             // $this->publishes([
             //    __DIR__ . '/../config/lara-audit.php' => config_path('lara-audit.php'),
             //], 'lara-audit.config');
+
+            $this->publishes([
+                __DIR__ . '/../database/migrations/2018_09_13_150755_create_model_audits_table.php' => base_path('database/migrations/2018_09_13_150755_create_model_audits_table.php'),
+            ], 'lara-audit');
         }
     }
 
