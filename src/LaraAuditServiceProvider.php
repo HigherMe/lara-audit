@@ -1,6 +1,6 @@
 <?php
 
-namespace ItsMill3rTime;
+namespace ItsMill3rTime\LaraAudit;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Events\Dispatcher;

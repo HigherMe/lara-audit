@@ -3,7 +3,7 @@
 namespace ItsMill3rTime\Traits;
 
 use Carbon\Carbon;
-use ItsMill3rTime\Models\ModelAudit;
+use ItsMill3rTime\LaraAudit\Models\ModelAudit;
 
 trait HasModelAudit
 {

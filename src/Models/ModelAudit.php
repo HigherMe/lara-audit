@@ -1,6 +1,6 @@
 <?php
 
-namespace ItsMill3rTime\Models;
+namespace ItsMill3rTime\LaraAudit\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
