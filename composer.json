@@ -1,0 +1,35 @@
+{
+  "name": "itsmill3rtime/lara-audit",
+  "description": ":Laravel model audits",
+  "license": "license",
+  "authors": [
+    {
+      "name": "author name",
+      "email": "author email",
+      "homepage": "author homepage"
+    }
+  ],
+  "homepage": "https://github.com/itsmill3rtime/lara-audit",
+  "keywords": [
+  ],
+  "require": {
+  },
+  "require-dev": {
+  },
+  "autoload": {
+    "psr-4": {
+      "Itsmill3rtime\\LaraAudit\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Itsmill3rtime\\LaraAudit\\LaraAuditServiceProvider"
+      ]
+    }
+  }
+}
