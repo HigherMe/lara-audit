@@ -1,9 +1,9 @@
 <?php
 
-namespace Itsmill3rtime\LaraAudit\Traits;
+namespace ItsMill3rTime\Traits;
 
 use Carbon\Carbon;
-use Itsmill3rtime\LaraAudit\Models\ModelAudit;
+use ItsMill3rTime\Models\ModelAudit;
 
 trait HasModelAudit
 {

@@ -2,26 +2,13 @@
   "name": "itsmill3rtime/lara-audit",
   "description": ":Laravel model audits",
   "homepage": "https://github.com/itsmill3rtime/lara-audit",
-  "keywords": [
-  ],
-  "require": {
-  },
-  "require-dev": {
-  },
   "autoload": {
     "psr-4": {
-      "Itsmill3rtime\\LaraAudit\\": "src/"
+      "Itsmill3rtime\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-    }
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Itsmill3rtime\\LaraAudit\\LaraAuditServiceProvider"
-      ]
     }
   }
 }

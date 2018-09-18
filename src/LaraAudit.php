@@ -1,6 +1,6 @@
 <?php
 
-namespace Itsmill3rtime\LaraAudit;
+namespace ItsMill3rTime;
 
 class LaraAudit
 {
