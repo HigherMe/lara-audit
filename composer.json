@@ -1,14 +1,6 @@
 {
   "name": "itsmill3rtime/lara-audit",
   "description": ":Laravel model audits",
-  "license": "license",
-  "authors": [
-    {
-      "name": "author name",
-      "email": "author email",
-      "homepage": "author homepage"
-    }
-  ],
   "homepage": "https://github.com/itsmill3rtime/lara-audit",
   "keywords": [
   ],
