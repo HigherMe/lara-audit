@@ -1,6 +1,6 @@
 <?php
 
-namespace ItsMill3rTime\Traits;
+namespace ItsMill3rTime\LaraAudit\Traits;
 
 use Carbon\Carbon;
 use ItsMill3rTime\LaraAudit\Models\ModelAudit;
