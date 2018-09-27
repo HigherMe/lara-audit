@@ -40,6 +40,7 @@ trait HasModelAudit
 
     public function preSave()
     {
+        $this->loadIngores();
         $this->original_data = $this->original;
         $this->updated_data = $this->attributes;
 
@@ -67,6 +68,7 @@ trait HasModelAudit
 
     public function postSave()
     {
+        $this->loadIngores();
         if ($this->updating) {
             $revisions = [];
             foreach ($this->dirty_data as $column => $value) {
@@ -92,6 +94,7 @@ trait HasModelAudit
 
     public function postCreate()
     {
+        $this->loadIngores();
         $revisions[] = [
             'model_type' => $this->getMorphClass(),
             'model_id'   => $this->getKey(),
@@ -108,6 +111,7 @@ trait HasModelAudit
 
     public function preDelete()
     {
+        $this->loadIngores();
         if ($this->isSoftDelete() === false) {
             \DB::table('model_audits')->where('model_type', '=', $this->getMorphClass())->where('model_id', '=', $this->getKey())->delete();
         }
@@ -115,6 +119,7 @@ trait HasModelAudit
 
     public function postDelete()
     {
+        $this->loadIngores();
         if ($this->isSoftDelete()) {
             $revisions[] = [
                 'model_type' => $this->getMorphClass(),
@@ -133,6 +138,7 @@ trait HasModelAudit
 
     public function postRestore()
     {
+        $this->loadIngores();
         if ($this->isSoftDelete()) {
             $revisions[] = [
                 'model_type' => $this->getMorphClass(),
@@ -184,5 +190,12 @@ trait HasModelAudit
         }
 
         return [];
+    }
+
+    private function loadIngores()
+    {
+        if (isset($this->audit_model_ignore) && is_array($this->audit_model_ignore)) {
+            $this->dont_audit_fields = array_merge($this->audit_model_ignore, $this->dont_audit_fields);
+        }
     }
 }
