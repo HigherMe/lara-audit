@@ -10,9 +10,22 @@ class ModelAudit extends Model
     protected $appends = ['display_column', 'old_display_value', 'new_display_value'];
     protected $with = ['actor', 'model'];
 
+    protected $oldValueDisplayOverride = null;
+    protected $newValueDisplayOverride = null;
+
     public function model()
     {
         return $this->morphTo();
+    }
+
+    public function setNewDisplayValue($value)
+    {
+        $this->newValueDisplayOverride = $value;
+    }
+
+    public function setOldDisplayValue($value)
+    {
+        $this->oldValueDisplayOverride = $value;
     }
 
     public function getDisplayColumnAttribute()
@@ -33,6 +46,10 @@ class ModelAudit extends Model
 
     public function getNewDisplayValueAttribute()
     {
+        if (!is_null($this->newValueDisplayOverride)) {
+            return $this->newValueDisplayOverride;
+        }
+
         if (in_array($this->operation, ['delete', 'restore'])) {
             return $this->operation . 'd';
         }
@@ -62,6 +79,10 @@ class ModelAudit extends Model
 
     public function getOldDisplayValueAttribute()
     {
+        if (!is_null($this->oldValueDisplayOverride)) {
+            return $this->oldValueDisplayOverride;
+        }
+
         if (in_array($this->operation, ['delete', 'restore'])) {
             return '';
         }
