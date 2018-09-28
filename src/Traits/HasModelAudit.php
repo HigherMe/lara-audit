@@ -58,10 +58,6 @@ trait HasModelAudit
             $this->fields_to_audit = array_only($this->fields_to_audit, $this->audit_fields);
         }
 
-        if (count($this->dont_audit_fields)) {
-            $this->fields_to_audit = array_except($this->fields_to_audit, $this->dont_audit_fields);
-        }
-
         $this->dirty_data = $this->getDirty();
         $this->updating = $this->exists;
     }
@@ -72,7 +68,7 @@ trait HasModelAudit
         if ($this->updating) {
             $revisions = [];
             foreach ($this->dirty_data as $column => $value) {
-                if ($this->isSoftDelete() === false || ($this->isSoftDelete() && $column !== $this->getDeletedAtColumn())) {
+                if (($this->isSoftDelete() === false || ($this->isSoftDelete() && $column !== $this->getDeletedAtColumn())) && !in_array($column, $this->dont_audit_fields)) {
                     $revisions[] = [
                         'model_type' => $this->getMorphClass(),
                         'model_id'   => $this->getKey(),
@@ -195,6 +191,9 @@ trait HasModelAudit
     private function loadIngores()
     {
         if (isset($this->audit_model_ignore) && is_array($this->audit_model_ignore)) {
+            foreach ($this->audit_model_ignore as $ignore) {
+                array_push($this->dont_audit_fields, $ignore);
+            }
             $this->dont_audit_fields = array_merge($this->audit_model_ignore, $this->dont_audit_fields);
         }
     }
