@@ -37,7 +37,7 @@ class ModelAudit extends Model
         }
 
         $audit_transform = array_get(with(new $this->model_type)->getAuditTransforms(), $this->column);
-        if ($this->checkTransformKeys($audit_transform) === false) {
+        if ($this->checkTransformKeys($audit_transform, true) === false) {
             return $this->column;
         }
 
@@ -108,15 +108,21 @@ class ModelAudit extends Model
         return (string)$remote_model;
     }
 
-    private function checkTransformKeys($audit_transform_array)
+    private function checkTransformKeys($audit_transform_array, $not_relation = false)
     {
         if (!is_array($audit_transform_array)) {
             return false;
         }
 
         $keys = array_keys($audit_transform_array);
-        if (!in_array('model', $keys) || !in_array('column', $keys) || !in_array('display', $keys)) {
-            return false;
+        if ($not_relation === false) {
+            if (!in_array('model', $keys) || !in_array('column', $keys) || !in_array('display', $keys)) {
+                return false;
+            }
+        } else {
+            if (!in_array('display', $keys)) {
+                return false;
+            }
         }
 
         return true;
