@@ -65,6 +65,7 @@ trait HasModelAudit
     public function postSave()
     {
         $this->loadIngores();
+        $revision = uniqid() . $this->getKey();
         if ($this->updating) {
             $revisions = [];
             foreach ($this->dirty_data as $column => $value) {
@@ -77,6 +78,7 @@ trait HasModelAudit
                         'new_value'  => array_get($this->updated_data, $column),
                         'user_id'    => $this->getAuthedUser(),
                         'operation'  => 'update',
+                        'revision'   => $revision,
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now(),
                     ];
@@ -91,6 +93,7 @@ trait HasModelAudit
     public function postCreate()
     {
         $this->loadIngores();
+        $revision = uniqid() . $this->getKey();
         $revisions[] = [
             'model_type' => $this->getMorphClass(),
             'model_id'   => $this->getKey(),
@@ -99,6 +102,7 @@ trait HasModelAudit
             'new_value'  => null,
             'user_id'    => $this->getAuthedUser(),
             'operation'  => 'create',
+            'revision'   => $revision,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];
@@ -116,6 +120,7 @@ trait HasModelAudit
     public function postDelete()
     {
         $this->loadIngores();
+        $revision = uniqid() . $this->getKey();
         if ($this->isSoftDelete()) {
             $revisions[] = [
                 'model_type' => $this->getMorphClass(),
@@ -125,6 +130,7 @@ trait HasModelAudit
                 'new_value'  => null,
                 'user_id'    => $this->getAuthedUser(),
                 'operation'  => 'delete',
+                'revision'   => $revision,
                 'created_at' => new \DateTime(),
                 'updated_at' => new \DateTime(),
             ];
@@ -135,6 +141,7 @@ trait HasModelAudit
     public function postRestore()
     {
         $this->loadIngores();
+        $revision = uniqid() . $this->getKey();
         if ($this->isSoftDelete()) {
             $revisions[] = [
                 'model_type' => $this->getMorphClass(),
@@ -144,6 +151,7 @@ trait HasModelAudit
                 'new_value'  => null,
                 'user_id'    => $this->getAuthedUser(),
                 'operation'  => 'restore',
+                'revision'   => $revision,
                 'created_at' => new \DateTime(),
                 'updated_at' => new \DateTime(),
             ];
