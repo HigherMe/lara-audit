@@ -18,6 +18,12 @@ class ModelAudit extends Model
         return $this->morphTo();
     }
 
+    function scopeModel($builder, $model)
+    {
+        $builder->where('model_type', '=', get_class($model));
+        $builder->where('model_id', '=', $model->id);
+    }
+
     public function setNewDisplayValue($value)
     {
         $this->newValueDisplayOverride = $value;
